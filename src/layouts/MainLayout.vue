@@ -35,7 +35,7 @@
           <q-card-section>
             <q-btn type="primary" @click="apiCall">远程接口调用</q-btn>
             http://jsonplaceholder.typicode.com/posts
-            <div  style="height: 200px; overflow: scroll;">返回：{{ data }}</div>
+            <div  style="height: 200px; overflow: scroll;">返回：{{ apiOut }}</div>
           </q-card-section>
         </q-card>
       </q-expansion-item>
@@ -100,7 +100,7 @@ const linksList = [
 
 const leftDrawerOpen = ref(false)
 
-let data = ref('')
+let apiOut = ref('')
 
 async function apiCall() {
   // window.electronAPI.sendMessage('do-something', 'Hello from Vue!');
@@ -110,11 +110,10 @@ async function apiCall() {
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);
-    data.value = data
-    alert(JSON.stringify(data))
+    apiOut.value = data
   } else {
-    data.value = await window.electronAPI.getData(url);
-    console.log('data', data);
+    apiOut.value = await window.electronAPI.getData(url);
+    console.log('data', apiOut);
   }
 }
 
