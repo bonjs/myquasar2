@@ -13,11 +13,17 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "devDependencies": {
-    "cordova-android": "^13.0.0"
+    "cordova-android": "^13.0.0",
+    "cordova-plugin-printer": "^0.8.0"
   },
   "cordova": {
     "platforms": [
       "android"
-    ]
+    ],
+    "plugins": {
+      "cordova-plugin-printer": {
+        "ANDROID_SUPPORT_V4_VERSION": "28.+"
+      }
+    }
   }
 }

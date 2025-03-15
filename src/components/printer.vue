@@ -3,9 +3,7 @@
   <!-- <el-select style="max-width:200px" v-model="selectedPrinter" placeholder="请选择打印机">
     <el-option v-for="printer in printers" :key="printer.name" :label="printer.name" :value="printer.name"></el-option>
   </el-select> -->
-
-  <q-select v-model="selectedPrinter" :options="printers" label="Standard" />
-
+  <q-btn label="选择打印机" color="primary" @click="selectPrinter" />
   <q-btn type="primary" @click="printDocument">打印</q-btn>
   <div>{{ printContent }}</div>
 
@@ -18,19 +16,41 @@ const $q = useQuasar()
 
 const isMobile = $q.platform.is.mobile;
 
-const printers = ref([]);
 const selectedPrinter = ref("");
 const printContent = ref("内容");
+
+function selectPrinter() {
+  if (window.cordova && window.cordova.plugins.printer) {
+    window.cordova.plugins.printer.pick((printer) => {
+      if (printer) {
+        this.selectedPrinter = printer; // 存储选定的打印机
+        console.log("已选择打印机:", printer);
+      } else {
+        console.log("未选择打印机");
+      }
+    }, (error) => {
+      console.error("选择打印机失败", error);
+    });
+  } else {
+    console.error("打印插件未正确加载");
+  }
+}
 
 // 获取打印机列表
 async function loadPrinters() {
   if (isMobile) {
-    printers.value = ['默认打印机'];
-  } else {
-    let p = await window.electronAPI.getPrinters();
-    printers.value = p.map((it) => {
-      return it.name;
+
+    window.cordova.plugins.printer.pick(function (printer) {
+      if (printer) {
+        console.log("选择的打印机:", printer);
+      } else {
+        console.log("用户未选择打印机");
+      }
+    }, function (error) {
+      console.error("打印机选择失败", error);
     });
+  } else {
+    console.log('');
   }
 }
 
