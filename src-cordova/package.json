@@ -30,7 +30,9 @@
       "android"
     ],
     "plugins": {
-      "cordova-plugin-printer": {},
+      "cordova-plugin-printer": {
+        "ANDROID_SUPPORT_V4_VERSION": "28.+"
+      },
       "cordova-plugin-androidx": {},
       "cordova-plugin-androidx-adapter": {},
       "cordova-plugin-code-push": {}
