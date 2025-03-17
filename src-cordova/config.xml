@@ -5,7 +5,9 @@
     <author email="dev@cordova.apache.org" href="https://cordova.apache.org">
         Apache Cordova Team
     </author>
-    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    <platform name="android">
+        <preference name="android-manifest/application/@android:usesCleartextTraffic" value="true" />
+    </platform>
     <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

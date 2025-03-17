@@ -33,8 +33,8 @@
       <q-expansion-item label="远程接口调用" icon="folder">
         <q-card>
           <q-card-section>
-            <q-btn type="primary" @click="apiCall">远程接口调用2</q-btn>
-            http://142.171.57.94/testApi
+            <q-btn type="primary" @click="apiCall">远程接口调用6</q-btn>
+            https://jsonplaceholder.typicode.com/posts
             <div  style="height: 200px; overflow: scroll;">返回：{{ apiOut }}</div>
           </q-card-section>
         </q-card>
@@ -108,9 +108,11 @@ async function apiCall() {
   // window.electronAPI.sendMessage('do-something', 'Hello from Vue!');
 
   let url = 'https://www.bonjs.com/testApi';
-  url = 'http://142.171.57.94/testApi'
+  // url = 'http://142.171.57.94/testApi'
+  // url = 'https://www.bonjs.com/testApi'
+  url = 'https://jsonplaceholder.typicode.com/posts'
 
-  // axios.defaults.baseURL = 'http://142.171.57.94';  // 设置基础 URL
+  // axios.defaults.baseURL = 'https://www.bonjs.com/';  // 设置基础 URL
   // axios.defaults.headers.post['Content-Type'] = 'application/json';  // 设置请求头
 
 
@@ -130,8 +132,10 @@ async function apiCall() {
       console.log("aaaa", response.data);
       apiOut.value = (JSON.stringify(response.data))
     }).catch(error => {
-        console.error('aaaa', 'Error:', error)
+        console.error('aaaa', 'Error:', JSON.stringify(error, null, ' '))
+        alert(JSON.stringify(error, null, ' '))
     });
+    
   }
 }
 
